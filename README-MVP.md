@@ -1,17 +1,9 @@
 # Module Project: Advanced Form Management - User Onboarding
 
-## Project Description
-
-We've seen many different styles of form management by now -- simple to complex. Today we are going to unleash your inner form-wizard! 🧙
-
 ## Instructions
 
 ### Task 1: Set Up The Project
 
-- [ ] Start off by installing a blank React app by running `npx create-react-app <app-name> --use-npm`.
-- [ ] Using `npm`, add the following as dependencies inside your React app:
-  - `yup`
-  - `axios`
 - [ ] Create a component file called `Form.js`, import it into your `App.js` file, and place the component in your JSX there.
 
 ### Task 2a: MVP
