@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
+import axios from 'axios';
 import Form from './Form';
 import schema from './validation/formSchema';
 import * as yup from 'yup';
@@ -22,6 +22,7 @@ function App() {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState(initialFormErrors);
 
+  // --------------------------------------------
 
   const validate = (name, value) => {
     // Validate this specific key/value pair
@@ -35,7 +36,7 @@ function App() {
       //  we clear the error message
       .then(valid => {
 
-        console.log('validate() - valid: ', valid);
+        //console.log('validate() - valid: ', valid);
 
         setFormErrors({...formErrors, [name]: ""})
       })
@@ -50,15 +51,19 @@ function App() {
       });
   };
 
+  // --------------------------------------------
+
   const change = (event) => {
     const { name, value } = event.target;
 
     validate(name, value);
 
-    console.log('input change, name: ', name, ', value: ', value, ', formValues: ', formValues);
+    //console.log('input change, name: ', name, ', value: ', value, ', formValues: ', formValues);
 
     setFormValues({ ...formValues, [name]: value});
   };
+
+  // --------------------------------------------
 
   const submit = (event) => {
     event.preventDefault(); // don't navigate
@@ -69,14 +74,40 @@ function App() {
 
     setUsers([...users, newUser]);    // Append new user
     setFormValues(initialFormValues); // Reset form
+
   };
+
+  // --------------------------------------------
+
+  const post_request = () => {
+
+    console.log('post_request');
+
+    const sentData = { data: "Hello World!" };
+
+    axios
+      .post("https://reqres.in/api/users", sentData)
+      .then(res => {
+        console.log(res.data); // Data was created successfully and logs to console
+      })
+      .catch(err => {
+        console.log(err); // There was an error creating the data and logs to console
+      });
+  };
+  useEffect(() => {
+    post_request();
+  }, []);
+
+  // --------------------------------------------
 
   useEffect(() => {
     schema.isValid(formValues)
       .then(valid => {
-        console.log('valid:', valid);
+        //console.log('valid:', valid);
       });
   }, [formValues]);
+
+  // --------------------------------------------
 
   return (
     <div className="App">
